@@ -12,21 +12,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.9'  # Specify the Python version you need
+        python-version: '3.11'
 
     - name: Install dependencies
       run: |
-        pip install jupyter pandas requests beautifulsoup4 geopy  # Add other dependencies as needed
-        pip install getorg --upgrade
+        pip install --upgrade pip
+        pip install jupyter nbformat nbclient ipykernel python-frontmatter geopy getorg pandas requests beautifulsoup4
+        python -m ipykernel install --user --name python3
 
     - name: Run Jupyter Notebook
       run: |
-        jupyter nbconvert --to notebook --execute talkmap.ipynb --output talkmap_out.ipynb
+        jupyter nbconvert --to notebook --execute talkmap.ipynb --output talkmap_out.ipynb --ExecutePreprocessor.kernel_name=python3
 
     - name: Commit changes
       run: |

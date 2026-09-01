@@ -27,23 +27,31 @@ title = ""
 # Perform geolocation
 for file in g:
     # Read the file
-    data = frontmatter.load(file)
-    data = data.to_dict()
+    try:
+        data = frontmatter.load(file)
+        data = data.to_dict()
+    except Exception as ex:
+        print(f"Error: failed to parse frontmatter in {file} with message {ex}")
+        continue
 
     # Press on if the location is not present
     if 'location' not in data:
         continue
 
-    # Prepare the description
-    title = data['title'].strip()
-    venue = data['venue'].strip()
-    location = data['location'].strip()
+    # Prepare the description — use safe defaults for missing fields
+    title = str(data.get('title', '')).strip() or '(untitled)'
+    venue = str(data.get('venue', '')).strip() or '(no venue)'
+    location = str(data['location']).strip()
     description = f"{title}<br />{venue}; {location}"
 
     # Geocode the location and report the status
     try:
-        location_dict[description] = geocoder.geocode(location, timeout=TIMEOUT)
-        print(description, location_dict[description])
+        result = geocoder.geocode(location, timeout=TIMEOUT)
+        if result is None:
+            print(f"Warning: could not geocode location '{location}' for talk '{title}'")
+            continue
+        location_dict[description] = result
+        print(description, result)
     except ValueError as ex:
         print(f"Error: geocode failed on input {location} with message {ex}")
     except GeocoderTimedOut as ex:
