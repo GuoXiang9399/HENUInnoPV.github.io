@@ -1,0 +1,28 @@
+- name: "郭祥 (Xiang Guo)"
+  avatar: "profile.png"
+  title: "副教授 Associate Professor"
+  location: "河南开封 Kaifeng, Henan, China"
+  employer: "河南大学 Henan University"
+  email: "guoxiang@henu.edu.cn"
+  googlescholar: "https://scholar.google.com/citations?user=90Qq6TkAAAAJ&hl"
+  orcid: "http://orcid.org/0000-0002-6928-2590"
+  researchgate: "https://www.researchgate.net/profile/Xiang-Guo-13"
+  github: "GuoXiang9399"
+
+- name: "深度求索 (DeepSeek)"
+  avatar: "deepseek.png"
+
+- name: "豆包 (Doubao)"
+  avatar: "doubao.png"
+
+- name: "月之暗面 (Kimi)"
+  avatar: "kimi.png"
+
+- name: "智谱 (GLM)"
+  avatar: "glm.png"
+
+- name: "ChatGPT (OpenAI)"
+  avatar: "chatgpt.png"
+
+- name: "Claude (Anthropic)"
+  avatar: "claude.png"

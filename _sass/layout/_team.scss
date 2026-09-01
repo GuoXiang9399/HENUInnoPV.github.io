@@ -1,0 +1,71 @@
+/* ==========================================================================
+   TEAM MEMBER - 2 columns grid
+   ========================================================================== */
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.team-member {
+  margin-bottom: 0;
+}
+
+.team-member__inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+}
+
+.team-member__avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.team-member__info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.team-member__name {
+  margin: 0 0 0.15em;
+  font-size: 1.1em;
+}
+
+.team-member__detail {
+  font-size: 0.85em;
+  color: #555;
+  margin: 0;
+}
+
+.team-member__links {
+  font-size: 0.85em;
+  margin-top: 0.15em;
+
+  a {
+    margin-right: 0.6em;
+    white-space: nowrap;
+  }
+}
+
+/* Tool URL display */
+.tool-url {
+  font-size: 0.8em;
+  color: #52adc8;
+  word-break: break-all;
+  text-decoration: none;
+  margin-top: 0.1em;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

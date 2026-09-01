@@ -1,0 +1,36 @@
+{% include base_path %}
+
+{% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+
+{% comment %}Derive image filename from post slug{% endcomment %}
+{% assign slug_parts = post.permalink | split: "/" %}
+{% assign slug = slug_parts | last %}
+
+<div class="pub-card">
+  <article itemscope itemtype="http://schema.org/CreativeWork">
+
+    {% comment %}Publication image{% endcomment %}
+    <div class="pub-card__image">
+      {% assign pub_img = slug | prepend: "/images/publications/" | append: ".png" %}
+      {% assign pub_img_jpg = slug | prepend: "/images/publications/" | append: ".jpg" %}
+      <img src="{{ pub_img | prepend: base_path }}"
+           onerror="this.onerror=null;this.src='{{ pub_img_jpg | prepend: base_path }}';"
+           alt="{{ title }}" loading="lazy" />
+    </div>
+
+    {% comment %}Publication title{% endcomment %}
+    <div class="pub-card__title" itemprop="headline">
+      {% if post.link %}
+        <a href="{{ post.link }}">{{ title }}</a>
+      {% else %}
+        <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
+      {% endif %}
+    </div>
+
+    {% comment %}Venue and year{% endcomment %}
+    {% if post.venue %}
+    <div class="pub-card__venue">{{ post.venue }}, {{ post.date | default: "1900-01-01" | date: "%Y" }}</div>
+    {% endif %}
+
+  </article>
+</div>
