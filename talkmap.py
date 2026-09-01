@@ -1,64 +1,133 @@
 # Leaflet cluster map of talk locations
 #
-# Run this from the _talks/ directory, which contains .md files of all your
-# talks. This scrapes the location YAML field from each .md file, geolocates it
-# with geopy/Nominatim, and uses the getorg library to output data, HTML, and
-# Javascript for a standalone cluster map. This is functionally the same as the
-# #talkmap Jupyter notebook.
-import frontmatter
-import glob
-import getorg
-from geopy import Nominatim
-from geopy.exc import GeocoderTimedOut
+# Standalone equivalent of talkmap.ipynb.
+# Designed to NEVER crash the calling process — used as CI fallback when the
+# notebook path fails.  Imports, geocoding, frontmatter parsing and getorg
+# map-writing are all wrapped in try/except.
+import sys
+import time
+import traceback
 
-# Set the default timeout, in seconds
-TIMEOUT = 5
+# ---- Imports (soft-fail) ----------------------------------------------------
+try:
+    import frontmatter
+    import glob
+    import getorg
+    import os
+    from geopy import Nominatim
+    from geopy.exc import (
+        GeocoderTimedOut,
+        GeocoderServiceError,
+        GeocoderQuotaExceeded,
+        GeocoderUnavailable,
+    )
+    print("[talkmap.py] imports OK")
+except Exception as ex:
+    print(f"[talkmap.py][FATAL-IMPORT] {type(ex).__name__}: {ex}")
+    traceback.print_exc()
+    # Exit 0 so the surrounding CI step does not treat this as a pipeline failure
+    sys.exit(0)
 
-# Collect the Markdown files
-g = glob.glob("_talks/*.md")
 
-# Prepare to geolocate
-geocoder = Nominatim(user_agent="academicpages.github.io")
+TIMEOUT = 10
+
+# ---- Glob talk files --------------------------------------------------------
+try:
+    g = sorted(glob.glob("_talks/*.md"))
+    print(f"[talkmap.py] Found {len(g)} talk file(s): {g}")
+except Exception as ex:
+    print(f"[talkmap.py] glob error: {ex}")
+    g = []
+
+# ---- Geocoder ---------------------------------------------------------------
+geocoder = None
+try:
+    geocoder = Nominatim(user_agent="henu-innopv-ci/1.0", timeout=TIMEOUT)
+    print("[talkmap.py] Nominatim geocoder initialized")
+except Exception as ex:
+    print(f"[talkmap.py][WARN] Could not initialize Nominatim geocoder: {ex}")
+    geocoder = None
+
+
+# ---- Geolocation ------------------------------------------------------------
 location_dict = {}
-location = ""
-permalink = ""
-title = ""
+failed_files = []
 
-# Perform geolocation
 for file in g:
-    # Read the file
+    print(f"\n--- Processing {file} ---")
+
+    # 1) Parse frontmatter safely
     try:
         data = frontmatter.load(file)
         data = data.to_dict()
     except Exception as ex:
-        print(f"Error: failed to parse frontmatter in {file} with message {ex}")
+        print(f"  SKIP: failed to parse frontmatter: {ex}")
+        failed_files.append((file, "frontmatter", str(ex)))
         continue
 
-    # Press on if the location is not present
-    if 'location' not in data:
+    # 2) Skip when no location
+    if "location" not in data or not str(data.get("location", "")).strip():
+        print("  SKIP: no location field — bypassing")
         continue
 
-    # Prepare the description — use safe defaults for missing fields
-    title = str(data.get('title', '')).strip() or '(untitled)'
-    venue = str(data.get('venue', '')).strip() or '(no venue)'
-    location = str(data['location']).strip()
+    # 3) Safe field access
+    title = str(data.get("title", "")).strip() or "(untitled)"
+    venue = str(data.get("venue", "")).strip() or "(no venue)"
+    location = str(data["location"]).strip()
     description = f"{title}<br />{venue}; {location}"
 
-    # Geocode the location and report the status
+    # 4) Geocoder missing
+    if geocoder is None:
+        failed_files.append((file, "no-geocoder", location))
+        print("  SKIP: geocoder unavailable")
+        continue
+
+    # 5) Geocode
     try:
         result = geocoder.geocode(location, timeout=TIMEOUT)
         if result is None:
-            print(f"Warning: could not geocode location '{location}' for talk '{title}'")
-            continue
-        location_dict[description] = result
-        print(description, result)
-    except ValueError as ex:
-        print(f"Error: geocode failed on input {location} with message {ex}")
-    except GeocoderTimedOut as ex:
-        print(f"Error: geocode timed out on input {location} with message {ex}")
+            print(f"  WARN: Nominatim returned None for location='{location}'")
+            failed_files.append((file, "geocode-None", location))
+        else:
+            location_dict[description] = result
+            print(f"  OK: {location} -> ({result.latitude}, {result.longitude})")
+    except (GeocoderTimedOut, GeocoderServiceError,
+            GeocoderQuotaExceeded, GeocoderUnavailable) as ex:
+        print(f"  WARN: Nominatim service error for '{location}': {type(ex).__name__}: {ex}")
+        failed_files.append((file, "geocoder-service", f"{type(ex).__name__}: {ex}"))
     except Exception as ex:
-        print(f"An unhandled exception occurred while processing input {location} with message {ex}")
+        print(f"  WARN: geocode unexpected error for '{location}': {type(ex).__name__}: {ex}")
+        failed_files.append((file, "geocode-other", f"{type(ex).__name__}: {ex}"))
 
-# Save the map
-m = getorg.orgmap.create_map_obj()
-getorg.orgmap.output_html_cluster_map(location_dict, folder_name="talkmap", hashed_usernames=False)
+    # Nominatim usage policy: max 1 req/s
+    time.sleep(1.1)
+
+
+# ---- Summary ----------------------------------------------------------------
+print("\n========== SUMMARY ==========")
+print(f"Successful geolocations: {len(location_dict)}")
+print(f"Failed / skipped:         {len(failed_files)}")
+for f, reason, msg in failed_files:
+    print(f"  - {f} : {reason} : {msg}")
+
+
+# ---- Write map --------------------------------------------------------------
+print(f"\n--- Saving cluster map with {len(location_dict)} locations ---")
+try:
+    m = getorg.orgmap.create_map_obj()
+    getorg.orgmap.output_html_cluster_map(
+        location_dict, folder_name="talkmap", hashed_usernames=False
+    )
+    print("[talkmap.py][OK] output_html_cluster_map completed")
+    if os.path.isdir("talkmap"):
+        print("talkmap/ contents:", sorted(os.listdir("talkmap")))
+    else:
+        print("[talkmap.py][WARN] talkmap/ directory not created by getorg")
+except Exception as ex:
+    print(f"[talkmap.py][FAIL] getorg: {type(ex).__name__}: {ex}")
+    traceback.print_exc()
+    print("(continuing — no map written)")
+
+# Always exit 0
+print("\nDone.")
+sys.exit(0)

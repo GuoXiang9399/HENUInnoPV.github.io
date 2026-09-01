@@ -1,28 +1,13 @@
-- name: "郭祥 (Xiang Guo)"
+# 病原与媒介生物创新研究中心 团队成员
+# （如要添加成员：复制下方 block，修改信息、放入 /images/ 下的头像文件名即可）
+
+- name: "郭祥  Xiang Guo"
   avatar: "profile.png"
-  title: "副教授 Associate Professor"
-  location: "河南开封 Kaifeng, Henan, China"
-  employer: "河南大学 Henan University"
+  title: "中心负责人 / 副教授 Center Director, Associate Professor"
+  location: "广东深圳 / 河南开封 Shenzhen / Kaifeng"
+  employer: "河南大学深圳研究院 病原与媒介生物创新研究中心"
   email: "guoxiang@henu.edu.cn"
   googlescholar: "https://scholar.google.com/citations?user=90Qq6TkAAAAJ&hl"
   orcid: "http://orcid.org/0000-0002-6928-2590"
   researchgate: "https://www.researchgate.net/profile/Xiang-Guo-13"
   github: "GuoXiang9399"
-
-- name: "深度求索 (DeepSeek)"
-  avatar: "deepseek.png"
-
-- name: "豆包 (Doubao)"
-  avatar: "doubao.png"
-
-- name: "月之暗面 (Kimi)"
-  avatar: "kimi.png"
-
-- name: "智谱 (GLM)"
-  avatar: "glm.png"
-
-- name: "ChatGPT (OpenAI)"
-  avatar: "chatgpt.png"
-
-- name: "Claude (Anthropic)"
-  avatar: "claude.png"

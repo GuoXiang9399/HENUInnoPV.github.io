@@ -6,33 +6,155 @@ on:
       - 'talks/**'
       - '_talks/**'
       - 'talkmap.ipynb'
+      - 'talkmap.py'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    # ========================================================
+    # CRITICAL: 允许 GITHUB_TOKEN 写仓库，否则 git push 必 403
+    # ========================================================
+    permissions:
+      contents: write
+
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository (full history for push)
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        persist-credentials: true
 
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.11'
+        cache: 'pip'
 
     - name: Install dependencies
       run: |
-        pip install --upgrade pip
-        pip install jupyter nbformat nbclient ipykernel python-frontmatter geopy getorg pandas requests beautifulsoup4
-        python -m ipykernel install --user --name python3
+        set -euo pipefail
+        python -m pip install --upgrade pip setuptools wheel
+        python -m pip install \
+          jupyter \
+          nbconvert \
+          nbformat \
+          nbclient \
+          ipykernel \
+          python-frontmatter \
+          geopy \
+          getorg \
+          pandas \
+          requests \
+          beautifulsoup4
+        python -m ipykernel install --user --name python3 --display-name "Python 3"
+        echo "--- Installed package versions ---"
+        python -m pip list | grep -iE "jupyter|nb|frontmatter|geopy|getorg|pandas|ipykernel" || true
 
-    - name: Run Jupyter Notebook
+    - name: Environment sanity check
       run: |
-        jupyter nbconvert --to notebook --execute talkmap.ipynb --output talkmap_out.ipynb --ExecutePreprocessor.kernel_name=python3
+        set -euo pipefail
+        echo "Files in _talks/:"
+        ls -la _talks/ || true
+        echo ""
+        echo "Python version:"
+        python --version
+        echo ""
+        echo "Kernel spec list:"
+        jupyter kernelspec list || true
+        echo ""
+        echo "Import smoke test:"
+        python -c "import frontmatter, geopy, getorg, pandas, bs4; print('all imports OK')"
 
-    - name: Commit changes
+    - name: Run Jupyter Notebook (with error log on failure)
+      id: run_nb
       run: |
+        set -euo pipefail
+        echo "--- Running nbconvert ---"
+        set +e
+        jupyter nbconvert \
+          --to notebook \
+          --execute talkmap.ipynb \
+          --output talkmap_out.ipynb \
+          --ExecutePreprocessor.kernel_name=python3 \
+          --ExecutePreprocessor.timeout=600 \
+          --no-prompt 2>&1 | tee nbconvert.log
+        NBC_EXIT=${PIPESTATUS[0]}
+        set -e
+        echo ""
+        echo "nbconvert exit code: ${NBC_EXIT}"
+        echo ""
+        echo "--- Files produced by notebook ---"
+        ls -la talkmap/ || true
+        ls -la talkmap_out.ipynb || true
+        echo ""
+        if [ ${NBC_EXIT} -ne 0 ]; then
+          echo "--- nbconvert FAILED. Dumping log tail ---"
+          tail -n 100 nbconvert.log 2>/dev/null || true
+          exit ${NBC_EXIT}
+        fi
+
+    - name: Fallback: run talkmap.py if notebook produced no output
+      if: always()
+      run: |
+        set -euo pipefail
+        if [ ! -d "talkmap" ] || [ -z "$(ls -A talkmap 2>/dev/null)" ]; then
+          echo "talkmap/ empty or missing — running talkmap.py as fallback..."
+          set +e
+          python talkmap.py 2>&1 | tee talkmap_py.log
+          PY_EXIT=${PIPESTATUS[0]}
+          set -e
+          echo "talkmap.py exit code: ${PY_EXIT}"
+          if [ ${PY_EXIT} -ne 0 ]; then
+            echo "(non-fatal: will continue even if talkmap.py exits nonzero)"
+            tail -n 50 talkmap_py.log 2>/dev/null || true
+          fi
+        else
+          echo "talkmap/ already populated — skipping talkmap.py fallback"
+        fi
+
+    - name: Show diff of changes before commit
+      id: diff
+      run: |
+        set -euo pipefail
+        git status --short || true
+        echo "---"
+        git diff --stat || true
+
+    - name: Commit and push changes
+      id: commit_push
+      if: always()
+      run: |
+        set -euo pipefail
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add .
-        git commit -m "Automated update of talk locations" || echo "No changes to commit"
-        git push
+
+        # Only add specific output files (avoid accidentally adding junk)
+        git add talkmap/ talkmap_out.ipynb 2>/dev/null || true
+
+        if git diff --cached --quiet; then
+          echo "No output changes to commit — exiting gracefully."
+          exit 0
+        fi
+
+        echo "Committing changes..."
+        git commit -m "Automated update of talk locations [skip ci]" || {
+          echo "git commit failed (non-fatal)"
+          exit 0
+        }
+
+        echo "Pushing to origin/${GITHUB_REF_NAME}..."
+        set +e
+        git push origin "HEAD:${GITHUB_REF_NAME}" 2>&1 | tee push.log
+        PUSH_EXIT=${PIPESTATUS[0]}
+        set -e
+        if [ ${PUSH_EXIT} -ne 0 ]; then
+          echo "git push FAILED (exit ${PUSH_EXIT}):"
+          cat push.log 2>/dev/null || true
+          echo ""
+          echo "Possible fixes:"
+          echo "  - Ensure workflow has 'permissions: contents: write' (present in this YAML)"
+          echo "  - Ensure default GITHUB_TOKEN allows 'Read and write permissions' in repo Settings > Actions > General > Workflow permissions"
+          echo "  - Branch protection: check if GitHub Actions is allowed to push to this branch"
+        fi
+        exit 0

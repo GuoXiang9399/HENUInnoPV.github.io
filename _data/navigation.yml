@@ -1,13 +1,16 @@
 # The following is the order of the links in the header of the website.
-#
-# Changing the order here will adjust the order and you can also add additional
-# links. Removing a link prevents it from showing in the header, but does not
-# prevent it from being included in the site.
-#
-# NOTE that only one of the CV options should be selected, the first is for the
-#      Markdown formatted page while the second is generated using JSON.
+# 研究中心官网主菜单：首页 → 关于我们 → 研究方向 → 团队成员 → 学术成果 → 开发工具
 
 main:
+
+  - title: "首页 Home"
+    url: /
+
+  - title: "关于我们 About"
+    url: /#about
+
+  - title: "研究方向 Research"
+    url: /#research
 
   - title: "团队成员 Team"
     url: /team/
@@ -15,17 +18,5 @@ main:
   - title: "学术论文 Publications"
     url: /publications/
 
-  - title: "教学课程 Teaching"
-    url: /teaching/
-
   - title: "开发工具 Tools"
     url: /tools/
-
-  #- title: "Portfolio"
-  #  url: /portfolio/
-
-  #- title: "CV"
-  #  url: /cv/
-
-  # - title: "CV"
-  #   url: /cv-json/

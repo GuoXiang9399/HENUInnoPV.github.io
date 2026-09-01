@@ -7,77 +7,76 @@
 # server process.
 
 # Basic Site Settings
-locale                   : "en-US"
+locale                   : "zh-CN"
 site_theme               : "default" # Currently available options are "default", "air"
-title                    : "HENU GUO Lab"
-title_separator          : "-"
-name                     : &name "Xiang Guo"
-description              : &description ""   # Update this with a general description of your site, this is the default if not overridden by a page
-url                      : https://guoxiang9399.github.io/GuoXiang.github.io # The base hostname & protocol for your site e.g. "https://[your GitHub username].github.io",
-                                                           # or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
+title                    : "病原与媒介生物创新研究中心 | 河南大学深圳研究院"
+title_separator          : "|"
+name                     : &name "IPV Center, HENU Shenzhen Research Institute"
+description              : &description "河南大学深圳研究院病原与媒介生物创新研究中心（IPV Center）——聚焦病毒流行与进化、媒介伊蚊生态习性、病毒前沿技术探索、寄生虫学等方向，服务深圳及粤港澳大湾区公共卫生事业。"
+url                      : https://henuinnopv.github.io  # The base hostname & protocol for your site
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "GuoXiang9399/GuoXiang.github.io"
+repository               : "HENUInnoPV/HENUInnoPV.github.io"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
-  # Biographic information
+  # Biographic information — 机构官网：显示中心信息而非个人
   avatar           : "profile.png"
-  name             : "郭祥 (Xiang Guo)"
-  pronouns         : # example: "she/her"  
-  bio              : "副教授 Associate Professor"
-  location         : "河南开封 Kaifeng, Henan, China"
-  employer         : "河南大学 Henan University"
+  name             : "病原与媒介生物创新研究中心"
+  pronouns         :
+  bio              : "河南大学深圳研究院 / IPV Center"
+  location         : "广东深圳 Shenzhen, Guangdong, China"
+  employer         : "河南大学 Shenzhen Research Institute, Henan University"
   uri              : # URL
-  email            : "guoxiang@henu.edu.cn" 
+  email            : "guoxiang@henu.edu.cn"
 
   # Academic websites
-  academia         : # URL
-  arxiv            : # URL - Update with the correct link to your profile
+  academia         :
+  arxiv            :
   googlescholar    : "https://scholar.google.com/citations?user=90Qq6TkAAAAJ&hl"
-  inspire-hep      : # URL
-  impactstory      : # URL
+  inspire-hep      :
+  impactstory      :
   orcid            : "http://orcid.org/0000-0002-6928-2590"
-  semantic         : # URL
-  pubmed           : #"https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
+  semantic         :
+  pubmed           :
   researchgate     : "https://www.researchgate.net/profile/Xiang-Guo-13"
-  scopus           : # URL
+  scopus           :
 
   # Repositories and software development
-  bitbucket        : # Username - Update with your username on the site
-  codepen          : # Username
-  dribbble         : # Username
-  github           : "GuoXiang9399"
-  kaggle           : # Username  
-  stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")    
+  bitbucket        :
+  codepen          :
+  dribbble         :
+  github           : "HENUInnoPV"
+  kaggle           :
+  stackoverflow    :
 
   # Social media
-  artstation       : # Username
-  bluesky          : # # Replace this with you Bluesky username
-  facebook         : # Username
-  flickr           : # Username
-  foursquare       : # Username
-  goodreads        : # Username
-  google_plus      : # Username
-  keybase          : # Username
-  instagram        : # Username
-  lastfm           : # Username
-  linkedin         : # Username
-  mastodon         : # URL
-  medium           : # URL
-  pinterest        : # Username
-  soundcloud       : # Username
-  steam            : # Username
-  telegram         : # URL
-  tumblr           : # Username
-  twitter          : # Username for X / Twitter
-  vine             : # Username
-  weibo            : # Username
-  wikipedia        : # Username
-  xing             : # Username
-  youtube          : # Username
-  zhihu            : # Username x
+  artstation       :
+  bluesky          :
+  facebook         :
+  flickr           :
+  foursquare       :
+  goodreads        :
+  google_plus      :
+  keybase          :
+  instagram        :
+  lastfm           :
+  linkedin         :
+  mastodon         :
+  medium           :
+  pinterest        :
+  soundcloud       :
+  steam            :
+  telegram         :
+  tumblr         :
+  twitter          :
+  vine             :
+  weibo            :
+  wikipedia        :
+  xing             :
+  youtube          :
+  zhihu            :
 
 # Publication Category - The following the list of publication categories and their headings
 publication_category:
