@@ -1,25 +1,51 @@
 {% include base_path %}
 
-{% if site.author.github or site.author.bitbucket or site.atom_feed.hide != true %}
-<div class="page__footer-follow">
-  <ul class="social-icons">
-    {% if site.data.ui-text[site.locale].follow_label %}
-      <li><strong>{{ site.data.ui-text[site.locale].follow_label }}</strong></li>
-    {% endif %}
-    {% if site.author.github %}
-      <li><a href="http://github.com/{{ site.author.github }}"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
-    {% endif %}
-    {% if site.author.bitbucket %}
-      <li><a href="http://bitbucket.org/{{ site.author.bitbucket }}"><i class="fab fa-bitbucket" aria-hidden="true"></i> Bitbucket</a></li>
-    {% endif %}
-    {% if site.atom_feed.hide != true %}
-    <li><a href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ base_path }}/feed.xml{% endif %}"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].feed_label | default: "Feed" }}</a></li>
-    {% endif %}
-  </ul>
+<!-- ============ 机构页脚横幅 ============ -->
+<div class="footer__banner">
+  <img src="https://aka.doubaocdn.com/s/3jmFXkn6yZ"
+       alt="Research Center for Innovation in Pathogen & Vector Biology"
+       onerror="this.style.display='none'" />
+  <div class="footer__banner-overlay"></div>
 </div>
-{% endif %}
 
+<!-- ============ 页脚主体 ============ -->
+<div class="footer__main">
+
+  <!-- 左：中心信息 -->
+  <div class="footer__col footer__col--brand">
+    <h4>病原与媒介生物创新研究中心</h4>
+    <p class="footer__en">Research Center for Innovation in Pathogen &amp; Vector Biology</p>
+    <p class="footer__sub">Shenzhen Research Institute, Henan University</p>
+    <p class="footer__sub">河南大学深圳研究院</p>
+  </div>
+
+  <!-- 中：快速链接 -->
+  <div class="footer__col">
+    <h4>快速导航 Navigation</h4>
+    <ul class="footer__nav">
+      <li><a href="{{ base_path }}/#about">关于我们 About</a></li>
+      <li><a href="{{ base_path }}/team/">团队成员 Team</a></li>
+      <li><a href="{{ base_path }}/publications/">学术论文 Publications</a></li>
+      <li><a href="{{ base_path }}/tools/">数据库与工具 Tools</a></li>
+    </ul>
+  </div>
+
+  <!-- 右：联系方式 -->
+  <div class="footer__col">
+    <h4>联系我们 Contact</h4>
+    <ul class="footer__contact">
+      <li><i class="fas fa-envelope" aria-hidden="true"></i> guoxiang@henu.edu.cn</li>
+      <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 广东深圳 Shenzhen, Guangdong</li>
+      <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 河南开封 Kaifeng, Henan</li>
+      <li><i class="fab fa-github" aria-hidden="true"></i> <a href="https://github.com/HENUInnoPV" target="_blank">GitHub</a></li>
+      <li><i class="fas fa-graduation-cap" aria-hidden="true"></i> <a href="https://scholar.google.com/citations?user=90Qq6TkAAAAJ" target="_blank">Google Scholar</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ============ 版权栏 ============ -->
 <div class="page__footer-copyright">
-  &copy; {{ site.time | date: '%Y' }} {{ site.name | default: site.title }}, {{ site.data.ui-text[site.locale].powered_by | default: "Powered by" }} <a href="http://jekyllrb.com" rel="nofollow">ah</a> &amp; <a href="https://github.com/academicpages/academicpages.github.io">aah</a>, a fork of <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">ah</a>.<br />
-  Site last updated {{ "now" | date: '%Y-%m-%d' }}
+  &copy; {{ site.time | date: '%Y' }} {{ site.name | default: site.title }}. All rights reserved.<br />
+  <small>Site last updated {{ "now" | date: '%Y-%m-%d' }}</small>
 </div>
