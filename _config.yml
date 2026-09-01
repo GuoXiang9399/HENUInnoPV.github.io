@@ -13,9 +13,9 @@ title                    : "病原与媒介生物创新研究中心 | 河南大�
 title_separator          : "|"
 name                     : &name "Research Center for Innovation in Pathogen & Vector Biology, Shenzhen Research Institute, Henan University"
 description              : &description "河南大学深圳研究院病原与媒介生物创新研究中心——聚焦病毒流行与进化、媒介伊蚊生态习性、病毒前沿技术探索、寄生虫学等方向，服务深圳及粤港澳大湾区公共卫生事业。"
-url                      : https://henuinnopv.github.io  # The base hostname & protocol for your site
-baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "HENUInnoPV/HENUInnoPV.github.io"
+url                      : https://guoxiang9399.github.io # The base hostname & protocol for your site
+baseurl                  : "/HENUInnoPV.github.io" # the subpath of your site, e.g. "/blog"
+repository               : "GuoXiang9399/HENUInnoPV.github.io"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.

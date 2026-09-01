@@ -48,11 +48,11 @@ header:
         为深圳及粤港澳大湾区的传染病防控决策提供<strong>科学依据与技术支撑</strong>。
       </p>
       <p>
-        <a href="/team/" class="btn btn--primary">
+        <a href="{{ base_path }}/team/" class="btn btn--primary">
           <i class="fas fa-users" aria-hidden="true"></i> 认识研究团队
         </a>
         &nbsp;
-        <a href="/publications/" class="btn">
+        <a href="{{ base_path }}/publications/" class="btn">
           <i class="fas fa-book-open" aria-hidden="true"></i> 查看学术成果
         </a>
       </p>
@@ -139,17 +139,17 @@ header:
 
   <div class="home-links__grid">
 
-    <a href="/publications/" class="home-links__card">
+    <a href="{{ base_path }}/publications/" class="home-links__card">
       <i class="fas fa-book-open" aria-hidden="true"></i>
       <span>学术论文<br/><small>Publications</small></span>
     </a>
 
-    <a href="/team/" class="home-links__card">
+    <a href="{{ base_path }}/team/" class="home-links__card">
       <i class="fas fa-users" aria-hidden="true"></i>
       <span>团队成员<br/><small>Team Members</small></span>
     </a>
 
-    <a href="/tools/" class="home-links__card">
+    <a href="{{ base_path }}/tools/" class="home-links__card">
       <i class="fas fa-wrench" aria-hidden="true"></i>
       <span>数据库与工具<br/><small>Databases & Tools</small></span>
     </a>
