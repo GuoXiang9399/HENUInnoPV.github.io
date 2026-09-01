@@ -9,9 +9,6 @@ main:
   - title: "关于我们 About"
     url: /#about
 
-  - title: "研究方向 Research"
-    url: /#research
-
   - title: "团队成员 Team"
     url: /team/
 

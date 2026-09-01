@@ -5,7 +5,7 @@ redirect_from:
   - /about/
   - /about.html
 title: "病原与媒介生物创新研究中心"
-excerpt: "**河南大学深圳研究院**<br/>Research Center for Innovation in Pathogen & Vector Biology<br/>Shenzhen Research Institute, Henan University<br/><small>聚焦病原与媒介生物前沿研究 · 服务粤港澳大湾区公共卫生</small>"
+excerpt: "**Research Center for Innovation in Pathogen & Vector Biology, Shenzhen Research Institute, Henan University**<br/>河南大学深圳研究院 · 病原与媒介生物创新研究中心<br/><small>聚焦病原与媒介生物前沿研究 · 服务粤港澳大湾区公共卫生</small>"
 header:
   overlay_image: https://aka.doubaocdn.com/s/3jmFXkn6yZ
   overlay_filter: 0.5
@@ -36,7 +36,7 @@ header:
     <div class="home-about__text">
       <h2>立足深圳 · 服务湾区 · 面向世界</h2>
       <p>
-        河南大学深圳研究院<strong>病原与媒介生物创新研究中心</strong>（Innovation Center for Pathogen & Vector Biology, IPV）
+        河南大学深圳研究院<strong>病原与媒介生物创新研究中心</strong>（Research Center for Innovation in Pathogen & Vector Biology）
         依托河南大学基础医学院病原生物学系与深圳市相关平台资源组建而成，
         聚焦<strong>登革热、基孔肯雅热</strong>等重要媒介传染病及寄生虫病的基础与应用研究。
       </p>
@@ -48,25 +48,22 @@ header:
         为深圳及粤港澳大湾区的传染病防控决策提供<strong>科学依据与技术支撑</strong>。
       </p>
       <p>
-        <a href="#research" class="btn btn--primary">
-          <i class="fas fa-microscope" aria-hidden="true"></i> 查看研究方向
+        <a href="/team/" class="btn btn--primary">
+          <i class="fas fa-users" aria-hidden="true"></i> 认识研究团队
         </a>
         &nbsp;
-        <a href="/team/" class="btn">
-          <i class="fas fa-users" aria-hidden="true"></i> 认识研究团队
+        <a href="/publications/" class="btn">
+          <i class="fas fa-book-open" aria-hidden="true"></i> 查看学术成果
         </a>
       </p>
     </div>
 
   </div>
-</section>
 
-<!-- ============================================================ -->
-<!--  研究方向  Research Areas                                     -->
-<!-- ============================================================ -->
-<section id="research" class="home-section" style="background: var(--global-bg-color); padding: 2em 0 3em;">
-
-  <h2 class="home-section__title">研究方向 <small>Research Areas</small></h2>
+  <!-- ---- 研究方向（合并在"关于我们"板块内） ---- -->
+  <h3 style="margin-top: 2.5em; margin-bottom: 1em; text-align: center; font-size: 1.4em;">
+    研究方向 <small style="font-weight: normal; color: var(--global-text-color-light);">Research Areas</small>
+  </h3>
 
   <div class="home-research__grid">
 
@@ -115,8 +112,8 @@ header:
       </div>
     </div>
 
-    <!-- Area 4 (extra row) -->
-    <div class="home-research__card" style="grid-column: 1 / -1; @include breakpoint($small) { grid-column: auto; }">
+    <!-- Area 4 -->
+    <div class="home-research__card">
       <img class="home-research__img"
            src="{{ base_path }}/images/publications/2025-08-08-Insights-on-the-sex-determination-vector-capacity-and-ecological.png"
            alt="寄生虫学与人畜共患病" />
