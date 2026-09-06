@@ -3,6 +3,7 @@ layout: splash
 permalink: /about/
 redirect_from:
   - /about.html
+body_class: "page--flex"
 title: "关于我们 About"
 excerpt: "**Research Center for Innovation in Pathogen & Vector Biology, Shenzhen Research Institute, Henan University**<br/>河南大学深圳研究院 · 病原与媒介生物创新研究中心"
 header:

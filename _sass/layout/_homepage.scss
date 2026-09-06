@@ -46,6 +46,45 @@
   }
 }
 
+/* ---- 页脚常规流布局（首页/关于我们/团队成员/学术论文共用）----
+   覆盖主题 sticky-footer 方案（body padding-bottom:9em + 页脚绝对定位），
+   消除内容与页脚之间的背景色空白 */
+.page--flex {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 0; /* 覆盖 body 的 9em sticky-footer 预留 */
+
+  #main {
+    flex: 1; /* 内容不足一屏时把页脚推到视口底部 */
+  }
+
+  /* 页脚回归常规文档流 */
+  .page__footer {
+    position: static;
+    margin-top: 0; /* 紧贴内容，无背景色空条 */
+  }
+}
+
+/* ---- 首页专属：Hero 拉伸填满视口 ---- */
+/* 注意：splash 布局中 Hero 渲染在 #main 之外（body 直接子元素），
+   首页 #main 内容为空，拉伸对象是 .page__hero--overlay 本身 */
+.page--home {
+  #main {
+    flex: 0 0 auto; /* 首页 #main 为空容器，不参与拉伸 */
+    margin-top: 0;
+  }
+
+  .page__hero--overlay {
+    flex: 1; /* Hero 自动拉伸，填满视口剩余空间 */
+    min-height: 0; /* 覆盖 65vh/75vh 最小高度，由 flex 决定 */
+
+    .wrapper {
+      min-height: 100%; /* 文字在拉伸后的 Hero 内保持垂直居中 */
+    }
+  }
+}
+
 /* ---- Section container ---- */
 .home-section {
   max-width: 1200px;

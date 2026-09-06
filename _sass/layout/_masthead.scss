@@ -69,12 +69,13 @@
 /* ---- 导航栏 Logo ---- */
 .site-logo {
   display: block;
-  height: 32px;
+  height: 40px;
   width: auto;
   background: #ffffff;
   border-radius: 4px;
-  padding: 2px 6px;
+  padding: 3px 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  vertical-align: middle;
 
   &:hover {
     transform: scale(1.02);
