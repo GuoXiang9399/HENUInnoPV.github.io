@@ -103,7 +103,14 @@ $(document).ready(function () {
   $('#theme-toggle').on('click', toggleTheme);
 
   // Enable the sticky footer
+  // (skip when body has .page--flex — CSS flex layout already places the
+  //  footer in normal flow, and this JS reservation would add unwanted
+  //  blank space below the footer)
   var bumpIt = function () {
+    if ($("body").hasClass("page--flex")) {
+      $("body").css("margin-bottom", "");
+      return;
+    }
     $("body").css("margin-bottom", $(".page__footer").outerHeight(true));
   }
   $(window).resize(function () {

@@ -56,13 +56,18 @@
   padding-bottom: 0; /* 覆盖 body 的 9em sticky-footer 预留 */
 
   #main {
-    flex: 1; /* 内容不足一屏时把页脚推到视口底部 */
+    flex: 1 0 auto; /* 内容页：内容不足一屏时拉伸，配合页脚推底 */
   }
 
-  /* 页脚回归常规文档流 */
+  /* 页脚回归常规文档流 + margin-top:auto 强制贴住容器底部：
+     - 内容不足一屏：auto 外边距吸收剩余空间，页脚贴住视口底部
+     - 内容超一屏：auto 塌缩为 0，页脚紧跟内容
+     - 不再单一依赖 Hero 的 flex:1 拉伸（双保险） */
   .page__footer {
     position: static;
-    margin-top: 0; /* 紧贴内容，无背景色空条 */
+    float: none; /* 清除主题的 float:left */
+    margin-top: auto;
+    margin-bottom: 0;
   }
 }
 
@@ -72,6 +77,13 @@
 .page--home {
   #main {
     flex: 0 0 auto; /* 首页 #main 为空容器，不参与拉伸 */
+    margin-top: 0;
+  }
+
+  /* 首页必须覆盖 .page--flex 的 margin-top:auto：
+     flexbox 中 auto 外边距优先级高于 flex-grow，
+     若保留 auto，页脚会抢走 Hero 的拉伸空间，导致背景图不铺满 */
+  .page__footer {
     margin-top: 0;
   }
 
