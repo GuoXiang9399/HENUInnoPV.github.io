@@ -89,10 +89,11 @@
 
   .page__hero--overlay {
     flex: 1; /* Hero 自动拉伸，填满视口剩余空间 */
-    min-height: calc(100vh + 8em); /* 高于视口：背景图更饱满，页面可轻微滚动 */
+    min-height: calc(100vh - 10vh); /* 视口高度的 90%，比之前低 10% */
     margin-bottom: 0; /* 关键：覆盖主题自带 2em 底边距，消除背景与页脚之间的空条 */
-    display: flex;      /* 标题在调高后的横幅中垂直居中，视觉平衡 */
-    align-items: center;
+    display: flex;
+    align-items: flex-start; /* 文字靠上 */
+    padding-top: 4em; /* 与顶部留出呼吸空间 */
   }
 }
 
