@@ -78,6 +78,7 @@
   .page__hero--overlay {
     flex: 1; /* Hero 自动拉伸，填满视口剩余空间 */
     min-height: 0; /* 覆盖 65vh/75vh 最小高度，由 flex 决定 */
+    margin-bottom: 0; /* 关键：覆盖主题自带 2em 底边距，消除背景与页脚之间的空条 */
 
     .wrapper {
       min-height: 100%; /* 文字在拉伸后的 Hero 内保持垂直居中 */
