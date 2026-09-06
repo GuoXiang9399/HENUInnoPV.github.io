@@ -1,5 +1,5 @@
 # The following is the order of the links in the header of the website.
-# 研究中心官网主菜单：首页 → 关于我们 → 研究方向 → 团队成员 → 学术成果 → 开发工具
+# 研究中心官网主菜单：首页 → 关于我们 → 团队成员 → 学术成果
 
 main:
 
@@ -14,6 +14,3 @@ main:
 
   - title: "学术论文 Publications"
     url: /publications/
-
-  - title: "开发工具 Tools"
-    url: /tools/

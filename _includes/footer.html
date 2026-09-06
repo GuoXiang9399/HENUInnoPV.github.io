@@ -1,22 +1,13 @@
 {% include base_path %}
 
-<!-- ============ 机构页脚横幅 ============ -->
-<div class="footer__banner">
-  <img src="{{ base_path }}/images/campus/minglun-cover.jpg"
-       alt="Research Center for Innovation in Pathogen & Vector Biology"
-       onerror="this.style.display='none'" />
-  <div class="footer__banner-overlay"></div>
-</div>
-
 <!-- ============ 页脚主体 ============ -->
 <div class="footer__main">
 
-  <!-- 左：中心信息 -->
+  <!-- 左：中心 Logo（点击跳转深圳研究院官网） -->
   <div class="footer__col footer__col--brand">
-    <h4>病原与媒介生物创新研究中心</h4>
-    <p class="footer__en">Research Center for Innovation in Pathogen &amp; Vector Biology</p>
-    <p class="footer__sub">Shenzhen Research Institute, Henan University</p>
-    <p class="footer__sub">河南大学深圳研究院</p>
+    <a href="https://szyjy.henu.edu.cn/" target="_blank" rel="noopener" title="河南大学深圳研究院">
+      <img class="footer__logo" src="{{ base_path }}/images/logo.jpg" alt="病原与媒介生物创新研究中心 · 河南大学深圳研究院" />
+    </a>
   </div>
 
   <!-- 中：快速链接 -->
@@ -26,7 +17,6 @@
       <li><a href="{{ base_path }}/about/">关于我们 About</a></li>
       <li><a href="{{ base_path }}/team/">团队成员 Team</a></li>
       <li><a href="{{ base_path }}/publications/">学术论文 Publications</a></li>
-      <li><a href="{{ base_path }}/tools/">数据库与工具 Tools</a></li>
     </ul>
   </div>
 
@@ -36,9 +26,6 @@
     <ul class="footer__contact">
       <li><i class="fas fa-envelope" aria-hidden="true"></i> guoxiang@henu.edu.cn</li>
       <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 广东深圳 Shenzhen, Guangdong</li>
-      <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 河南开封 Kaifeng, Henan</li>
-      <li><i class="fab fa-github" aria-hidden="true"></i> <a href="https://github.com/HENUInnoPV" target="_blank">GitHub</a></li>
-      <li><i class="fas fa-graduation-cap" aria-hidden="true"></i> <a href="https://scholar.google.com/citations?user=90Qq6TkAAAAJ" target="_blank">Google Scholar</a></li>
     </ul>
   </div>
 

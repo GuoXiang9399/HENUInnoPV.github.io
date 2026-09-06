@@ -44,6 +44,18 @@
       font-size: 1.3em;
     }
   }
+
+  .page__hero-logo {
+    display: block;
+    max-width: 480px;
+    width: 78%;
+    height: auto;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 14px 22px;
+    margin: 0 0 1.2em;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+  }
 }
 
 /* ---- Section container ---- */

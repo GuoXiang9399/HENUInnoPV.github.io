@@ -29,6 +29,9 @@
 >
   {% if page.header.overlay_color or page.header.overlay_image %}
     <div class="wrapper">
+      {% if page.header.logo %}
+        <p><img class="page__hero-logo" src="{% if page.header.logo contains '://' %}{{ page.header.logo }}{% else %}{{ base_path }}/images/{{ page.header.logo }}{% endif %}" alt="{{ page.title | default: site.title }}"></p>
+      {% endif %}
       <h1 class="page__title" itemprop="headline">
         {% if paginator %}
           {{ site.title }}{% unless paginator.page == 1 %} {{ site.data.ui-text[site.locale].page | default: "Page" }} {{ paginator.page }}{% endunless %}

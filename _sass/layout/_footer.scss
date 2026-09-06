@@ -19,7 +19,7 @@
   height: auto;
   /* sticky footer fix end */
 
-  margin-top: 3em;
+  margin-top: 1.5em;
 
   -webkit-animation: intro 0.3s both;
           animation: intro 0.3s both;
@@ -31,9 +31,9 @@
     @include clearfix;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 1em;
+    margin-top: 0.5em;
     max-width: 100%;
-    padding: 0 1em 1em;
+    padding: 0 1em 0.5em;
 
     @include breakpoint($x-large) {
       max-width: $x-large;
@@ -57,48 +57,17 @@
   }
 }
 
-.page__footer-copyright {
-  font-family: $global-font-family;
-  font-size: $type-size-7;
-}
-
 /* ==========================================================================
-   机构页脚横幅 + 三列布局
+   机构页脚三列布局（紧凑版）
    ========================================================================== */
-
-.footer__banner {
-  position: relative;
-  width: 100%;
-  height: 120px;
-  overflow: hidden;
-  background-color: #0d2b3e;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .footer__banner-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to right,
-      rgba(13, 43, 62, 0.85) 0%,
-      rgba(13, 43, 62, 0.4) 50%,
-      rgba(13, 43, 62, 0.7) 100%
-    );
-  }
-}
 
 .footer__main {
   @include clearfix;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 2em;
-  padding: 2.5em 1em 1.5em;
+  gap: 1em 2em;
+  padding: 1.2em 1em 0.6em;
   max-width: 100%;
 
   @include breakpoint($x-large) {
@@ -113,11 +82,11 @@
   min-width: 200px;
 
   h4 {
-    font-size: 1em;
+    font-size: 0.95em;
     font-weight: bold;
     color: var(--global-text-color);
-    margin-bottom: 0.8em;
-    padding-bottom: 0.4em;
+    margin-bottom: 0.4em;
+    padding-bottom: 0.2em;
     border-bottom: 1px solid var(--global-border-color);
   }
 
@@ -129,7 +98,7 @@
 
   li {
     font-size: 0.85em;
-    line-height: 2;
+    line-height: 1.7;
   }
 
   a {
@@ -151,29 +120,47 @@
 
 .footer__col--brand {
   h4 {
-    font-size: 1.15em;
+    font-size: 1.05em;
     border-bottom: none;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.3em;
+  }
+}
+
+.footer__logo {
+  display: block;
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 8px 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.02);
   }
 }
 
 .footer__en {
-  font-size: 0.8em;
-  color: var(--global-text-color-light);
-  margin-bottom: 0.3em;
-}
-
-.footer__sub {
   font-size: 0.78em;
   color: var(--global-text-color-light);
   margin-bottom: 0.2em;
 }
 
+.footer__sub {
+  font-size: 0.78em;
+  color: var(--global-text-color-light);
+  margin-bottom: 0.1em;
+}
+
 .page__footer-copyright {
+  font-family: $global-font-family;
+  font-size: $type-size-7;
   text-align: center;
-  padding: 1em;
+  padding: 0.6em 1em;
   border-top: 1px solid var(--global-border-color);
-  margin-top: 1em;
+  margin-top: 0.6em;
 }
 
 .page__footer-follow {

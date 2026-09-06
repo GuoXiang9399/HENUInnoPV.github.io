@@ -6,8 +6,9 @@ redirect_from:
 title: "关于我们 About"
 excerpt: "**Research Center for Innovation in Pathogen & Vector Biology, Shenzhen Research Institute, Henan University**<br/>河南大学深圳研究院 · 病原与媒介生物创新研究中心"
 header:
-  overlay_image: campus/jinming-cover.jpg
+  overlay_image: campus/minglun-cover.jpg
   overlay_filter: 0.5
+  logo: logo.jpg
   caption:
 ---
 
@@ -17,7 +18,7 @@ header:
 <!--  关于我们  About the Center                                   -->
 <!-- ============================================================ -->
 <section id="about" class="home-section home-section--bg"
-         style="background-image: linear-gradient(rgba(255,255,255,0.90), rgba(255,255,255,0.90)), url('{{ base_path }}/images/campus/jinming-3.jpg'); background-size: cover; background-position: center;">
+         style="background-image: linear-gradient(rgba(255,255,255,0.90), rgba(255,255,255,0.90)), url('{{ base_path }}/images/campus/minglun-3.jpg'); background-size: cover; background-position: center;">
 
   <h2 class="home-section__title">关于我们 <small>About the Center</small></h2>
 
@@ -61,7 +62,7 @@ header:
 <!--  基地风采  Campus Gallery                                    -->
 <!-- ============================================================ -->
 <section id="gallery" class="home-section home-section--bg"
-         style="background-image: linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.92)), url('{{ base_path }}/images/campus/minglun-3.jpg'); background-size: cover; background-position: center; padding: 2em 0 3em;">
+         style="background-image: linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.92)), url('{{ base_path }}/images/campus/jinming-3.jpg'); background-size: cover; background-position: center; padding: 2em 0 3em;">
 
   <h2 class="home-section__title">基地风采 <small>Our Campuses</small></h2>
 

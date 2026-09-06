@@ -65,3 +65,19 @@
     font-weight: 700;
   }
 }
+
+/* ---- 导航栏 Logo ---- */
+.site-logo {
+  display: block;
+  height: 44px;
+  width: auto;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 3px 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}
