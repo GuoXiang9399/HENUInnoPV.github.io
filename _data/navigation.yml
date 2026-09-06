@@ -7,7 +7,7 @@ main:
     url: /
 
   - title: "关于我们 About"
-    url: /#about
+    url: /about/
 
   - title: "团队成员 Team"
     url: /team/
