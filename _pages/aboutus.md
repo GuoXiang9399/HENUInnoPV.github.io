@@ -8,7 +8,6 @@ excerpt: "**Research Center for Innovation in Pathogen & Vector Biology, Shenzhe
 header:
   overlay_image: campus/minglun-cover.jpg
   overlay_filter: 0.5
-  logo: logo.jpg
   caption:
 ---
 

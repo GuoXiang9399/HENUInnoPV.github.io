@@ -6,7 +6,6 @@ excerpt: "**Research Center for Innovation in Pathogen & Vector Biology, Shenzhe
 header:
   overlay_image: campus/jinming-cover.jpg
   overlay_filter: 0.5
-  logo: logo.jpg
   caption:
   cta_url: "/about/"
   cta_label: "了解中心 About Us"

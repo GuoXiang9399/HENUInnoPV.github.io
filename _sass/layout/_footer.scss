@@ -126,22 +126,6 @@
   }
 }
 
-.footer__logo {
-  display: block;
-  max-width: 300px;
-  width: 100%;
-  height: auto;
-  background: #ffffff;
-  border-radius: 8px;
-  padding: 8px 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  transition: transform 0.2s ease;
-
-  &:hover {
-    transform: scale(1.02);
-  }
-}
-
 .footer__en {
   font-size: 0.78em;
   color: var(--global-text-color-light);
